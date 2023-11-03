@@ -4,13 +4,16 @@
     github: https://github.com/nleiva
     repository: anscible-scm-test
     default_path: /tmp
+    # Re-use Network credential type
+    user: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_USERNAME') }}"
+    token: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"
 
   tasks:
     - name: Retrieve host vars with default access
       ansible.scm.git_retrieve:
         origin:
           url: "{{ github  }}/{{ repository }}"
-          # token: "{{ token }}"
+          token: "{{ token }}"
           branch:
             name: main
             duplicate_detection: false
@@ -25,6 +28,6 @@
     - name: Publish the changes
       ansible.scm.git_publish:
         path: "{{ default_path }}/{{ repository }}"
-        # token: "{{ token }}"
-        # user: "{{ user) }}"
+        token: "{{ token }}"
+        user: "{{ user) }}"
         timeout: 60

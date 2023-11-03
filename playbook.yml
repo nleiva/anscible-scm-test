@@ -14,9 +14,9 @@
         origin:
           url: "{{ github  }}/{{ repository }}"
           token: "{{ token }}"
-          branch:
-            name: main
-            duplicate_detection: false
+        branch:
+          name: main
+          duplicate_detection: false
         parent_directory: "{{ default_path }}"
 
     - name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)

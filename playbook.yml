@@ -3,7 +3,7 @@
   vars:
     github: https://github.com/nleiva
     repository: anscible-scm-test
-    default_path: /tmp
+    default_path: /output
     # Re-use Network credential type
     user: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_USERNAME') }}"
     token: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"

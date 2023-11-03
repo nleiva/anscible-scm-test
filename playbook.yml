@@ -29,5 +29,7 @@
       ansible.scm.git_publish:
         path: "{{ default_path }}/{{ repository }}"
         token: "{{ token }}"
-        user: "{{ user }}"
+        user: 
+          name: "{{ user }}"
+          email: "{{ email }}"
         timeout: 60

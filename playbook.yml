@@ -1,0 +1,30 @@
+- name: Test SCM collection
+  hosts: localhost
+  vars:
+    github: https://github.com/nleiva
+    repository: anscible-scm-test
+    default_path: /tmp
+
+  tasks:
+    - name: Retrieve host vars with default access
+      ansible.scm.git_retrieve:
+        origin:
+          url: "{{ github  }}/{{ repository }}"
+          # token: "{{ token }}"
+          branch:
+            name: main
+            duplicate_detection: false
+        parent_directory: "{{ default_path }}"
+
+    - name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+      ansible.builtin.file:
+        path: "{{ default_path }}/{{ repository }}/{{ ansible_date_time.iso8601_micro   }}"
+        state: touch
+        mode: u=rw,g=r,o=r
+
+    - name: Publish the changes
+      ansible.scm.git_publish:
+        path: "{{ default_path }}/{{ repository }}"
+        # token: "{{ token }}"
+        # user: "{{ user) }}"
+        timeout: 60
